@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ post.title }} {% endblock title %}
+
+{% block blogpostactive %} active {% endblock blogpostactive %}
+
+{% block body %}
+<div class="container my-3">
+    <h1>{{ post.title }}</h1>
+    <p class="text-muted">By {{ post.author }} on {{ post.datetime }}</p>
+    <div class="content">
+        <p>{{ post.content }}</p>
+    </div>
+</div>
+{% endblock body %}

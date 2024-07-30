@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %} Update User Details {% endblock title %}
+
+{% block body %}
+<div class="container my-4">
+    <h2>Update Your Details</h2>
+    <form method="POST" id="update-form" action="{% url 'update_user' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}">
+        </div>
+        <div class="mb-3">
+            <label for="first_name" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ user.first_name }}">
+        </div>
+        <div class="mb-3">
+            <label for="last_name" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ user.last_name }}">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}">
+        </div>
+        <button type="submit" class="btn btn-primary" onclick="updateUserDetails(event)">Update</button>
+    </form>
+</div>
+
+<script>
+function updateUserDetails(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    const form = document.getElementById('update-form');
+    const formData = new FormData(form);
+    const jsonData = {};
+    formData.forEach((value, key) => { jsonData[key] = value });
+
+    fetch(form.action, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: JSON.stringify(jsonData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert('Your details were updated successfully!');
+            window.location.reload();
+        } else {
+            alert('An error occurred while updating your details.');
+        }
+    })
+    .catch(error => console.error('Error:', error));
+}
+</script>
+
+{% endblock body %}
