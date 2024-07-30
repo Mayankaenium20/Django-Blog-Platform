@@ -5,7 +5,7 @@ iCoder is a Django-based blogging platform that features user authentication, bl
 ## Features
 
 1. **Dynamic Content Rendering**: Models retrieve data from the backend and dynamically display blog posts, author details, and timestamps.
-2. **CRUD Functionality**: Supports Create, Read, Update (PATCH), and Delete operations for user records and blog posts.
+2. **CRUD Functionality**: Supports Create, Read, and Update (PATCH) operations for user records and blog posts.
 3. **Admin Panel**: Comprehensive admin interface for managing users, posts, and site settings.
 4. **Slug URL Management**: Clean and SEO-friendly URLs for blog posts using slugs.
 5. **User Authentication**: Secure user login, signup, and logout with CSRF protection and session management.
